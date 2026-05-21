@@ -12,11 +12,11 @@ ensure_import_path()
 import numpy as np
 
 # ── STEP 2: NOW IMPORT YOUR PROJECT MODULES ──────────────────────────────────
-from model.data.input_setup import X_train, X_test, y_train, y_test, evaluate_model
+from input_processing.input_setup import X_train, X_test, y_train, y_test
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.ensemble import VotingRegressor
-from model.model.XGBoost import xgb_model
-from model.model.histogram_gradient_boosting import HGB_model
+from model.XGBoost import xgb_model
+from model.histogram_gradient_boosting import HGB_model
 
 # ── Model 7: Ensemble Model 1 ───────────────────────────────────────────────────────────
 

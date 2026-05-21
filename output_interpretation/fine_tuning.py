@@ -12,11 +12,11 @@ ensure_import_path()
 import numpy as np
 
 # ── STEP 2: NOW IMPORT YOUR PROJECT MODULES ──────────────────────────────────
-from model.data.input_setup import X_train, X_test, y_train, y_test
+from input_processing.input_setup import X_train, X_test, y_train, y_test
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.ensemble import VotingRegressor, HistGradientBoostingRegressor, GradientBoostingRegressor
 from sklearn.model_selection import RandomizedSearchCV
-from model.model.ensemble_2 import ensemble_GB_HGB_results    
+from model.ensemble_2 import ensemble_GB_HGB_results    
 import pandas as pd
 import matplotlib.pyplot as plt
 

@@ -1,0 +1,14 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache files
+**/__pycache__/
+*.pyc
+
+# Data and heavy model storage (Keep your portfolio clean)
+*.csv
+*.pkl
+*.h5
+*.keras

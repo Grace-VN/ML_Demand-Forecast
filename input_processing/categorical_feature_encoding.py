@@ -1,10 +1,6 @@
-# -*- coding: utf-8 -*-
 import sys
 from pathlib import Path
 import pandas as pd
-import matplotlib 
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
 ROOT_DIR = Path(__file__).parent.parent
@@ -14,7 +10,7 @@ def ensure_import_path():
 ensure_import_path() 
 
 # Import original dataframe
-from model.data.data_loading import df 
+from input_processing.data_loading import df
 
 # ── STEP 1: Feature Engineering (CRUCIAL FIX) ─────────────────────────────────
 print("🛠️ Engineering new features...")

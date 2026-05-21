@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
 from pathlib import Path
-import pandas as pd
 
 ROOT_DIR = Path(__file__).parent.parent
 
@@ -12,7 +11,8 @@ def ensure_import_path():
 ensure_import_path() 
 
 # Now import df globally so it's available everywhere in this file
-from model.data.data_loading import df 
+from input_processing.data_loading import df
+from input_processing.categorical_feature_encoding import df_encoded
 
 # You don't even need the load_data() function anymore!
 print(df.head())

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
 from pathlib import Path
-import pandas as pd
 import matplotlib 
 # Use Agg backend for script execution in headless environments
 matplotlib.use('Agg')
@@ -16,7 +15,7 @@ def ensure_import_path():
 ensure_import_path() 
 
 # Now import df globally so it's available everywhere in this file
-from model.data.data_loading import df 
+from input_processing.data_loading import df
 
 def plot_demand_distribution(df):
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))

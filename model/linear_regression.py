@@ -13,8 +13,8 @@ ensure_import_path()
 
 
 # ── STEP 2: NOW IMPORT YOUR PROJECT MODULES ──────────────────────────────────
-from model.data.input_setup import X_train, X_test, y_train, y_test, evaluate_model
 from sklearn.linear_model import LinearRegression
+from input_processing.input_setup import X_train, X_test, y_train, y_test, evaluate_model
 
 
 # ── STEP 3: RUN THE MODEL ────────────────────────────────────────────────────

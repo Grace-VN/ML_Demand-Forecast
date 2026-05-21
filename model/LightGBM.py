@@ -12,9 +12,7 @@ ensure_import_path()
 import numpy as np
 
 # ── STEP 2: NOW IMPORT YOUR PROJECT MODULES ──────────────────────────────────
-from model.data.input_setup import X_train, X_test, y_train, y_test, evaluate_model
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from input_processing.input_setup import X_train, X_test, y_train, y_test, evaluate_model
 from lightgbm import LGBMRegressor
 
 # ── Model 3: LightGBM Regressor ────────────────────────────────────────────────

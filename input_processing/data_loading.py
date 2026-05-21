@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import sys
 import io
 import pandas as pd
@@ -9,7 +8,7 @@ if sys.platform == "win32":
 
 # ── Load the dataset ──────────────────────────────────────────────────────────
 
-df = pd.read_csv('D:\Job\Portfolio\Machine Learning\Demand Forecast\demand_forecasting.csv')
+df = pd.read_csv('D:\Job\Portfolio\Machine Learning\Demand Forecast\data\demand_forecasting.csv')
 
 # Convert 'Date' column from text to actual date format
 df['Date'] = pd.to_datetime(df['Date'])

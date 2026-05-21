@@ -18,17 +18,18 @@ import numpy as np
 import pandas as pd
 
 # ── STEP 2: NOW IMPORT YOUR PROJECT MODULES ──────────────────────────────────
-from model.model.linear_regression import lr_results, lr_model
-from model.model.Gradient_Boosting import gb_results, gb_model
-from model.model.LightGBM import lgbm_results, lgbm_model
-from model.model.XGBoost import xgb_results, xgb_model
-from model.model.LSTM import lstm_results, lstm_model
-from model.model.histogram_gradient_boosting import HGB_results, HGB_model
-from model.model.ensemble_1 import ensemble_XGBoost_HGB_results, ensemble_XGBoost_HGB
-from model.model.ensemble_2 import ensemble_GB_HGB_results, ensemble_GB_HGB
-from model.data.input_setup import y_test, X_test, feature_columns
-from model.model.LSTM import X_test_lstm
-from model.model_comparison import results_df
+from model.linear_regression import lr_results, lr_model
+from model.Gradient_Boosting import gb_results, gb_model
+from model.LightGBM import lgbm_results, lgbm_model
+from model.XGBoost import xgb_results, xgb_model
+from model.LSTM import lstm_results, lstm_model
+from model.histogram_gradient_boosting import HGB_results, HGB_model
+from model.ensemble_1 import ensemble_XGBoost_HGB_results, ensemble_XGBoost_HGB
+from model.ensemble_2 import ensemble_GB_HGB_results, ensemble_GB_HGB
+from input_processing.input_setup import y_test, X_test, feature_columns
+from model.LSTM import X_test_lstm
+from output_interpretation import results_df
+
 
 # ── Store ALL Trained Models ────────────────────────────────────────────────
 # IMPORTANT:
@@ -39,6 +40,8 @@ all_models = {
     lr_results['Model']: lr_model,
 
     lgbm_results['Model']: lgbm_model,
+
+    lstm_results['Model']: lstm_model,
 
     gb_results['Model']: gb_model,
 

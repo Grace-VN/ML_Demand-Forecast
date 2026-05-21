@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
 from pathlib import Path
-import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -15,8 +14,8 @@ def ensure_import_path():
 ensure_import_path() 
 
 # Now import df globally so it's available everywhere in this file
-from model.data.data_loading import df 
-from model.data.categorical_feature_encoding import df_encoded
+from input_processing.categorical_feature_encoding import df_encoded
+
 
 # ── Define Features (X) and Target (y) ───────────────────────────────────────
 # X = all the input columns the model will learn from

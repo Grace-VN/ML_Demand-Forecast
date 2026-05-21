@@ -7,7 +7,7 @@ import pandas as pd
 # Add parent directory to path to allow imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from model.data.data_loading import df
+from input_processing.data_loading import df
 
 # ── Check for Missing Values ──────────────────────────────────────────────────
 missing = df.isnull().sum()
