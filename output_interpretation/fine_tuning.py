@@ -221,6 +221,41 @@ plt.ylabel("Demand")
 plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
-output_path = ROOT_DIR / 'actual_predicted_tuned_original.png'
+output_path = ROOT_DIR / 'output_storage' / 'images' / 'actual_predicted_tuned_original.png'
 plt.savefig(output_path)
 plt.show()
+
+# ── Export: Tuned Hybrid Predictions ────────────────────────────────────────
+
+predictions_df = pd.DataFrame({
+    'Actual':           y_true,
+    'Base_Predicted':   y_pred_base,
+    'Tuned_Predicted':  y_pred_tuned,
+    'Base_Error':       y_true - y_pred_base,
+    'Tuned_Error':      y_true - y_pred_tuned
+})
+
+predictions_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'tuned_hybrid_predictions.csv'
+predictions_df.to_csv(predictions_csv_path, index=True, index_label='Sample_Index')
+print(f"💾 Predictions exported to:\n   {predictions_csv_path}")
+
+# ── Export: Base vs Tuned Comparison Table ───────────────────────────────────
+
+comparison_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'tuned_vs_base_comparison.csv'
+df_compare.to_csv(comparison_csv_path, index=False)
+print(f"💾 Comparison table exported to:\n   {comparison_csv_path}")
+
+# ── Export: Tuned Hybrid Metrics Summary ─────────────────────────────────────
+
+metrics_df = pd.DataFrame([{
+    'Model':  tuned_hybrid_results['Model'],
+    'MAE':    tuned_hybrid_results['MAE'],
+    'RMSE':   tuned_hybrid_results['RMSE'],
+    'R2':     tuned_hybrid_results['R2'],
+    'Best_CV_MAE':      search.best_score_,
+    'Best_Params':      str(search.best_params_)
+}])
+
+metrics_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'tuned_hybrid_metrics.csv'
+metrics_df.to_csv(metrics_csv_path, index=False)
+print(f"💾 Metrics summary exported to:\n   {metrics_csv_path}")

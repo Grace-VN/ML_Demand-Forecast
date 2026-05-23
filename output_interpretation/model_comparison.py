@@ -21,7 +21,6 @@ from model.histogram_gradient_boosting import HGB_results, HGB_model
 from model.ensemble_1 import ensemble_XGBoost_HGB_results, ensemble_XGBoost_HGB
 from model.ensemble_2 import ensemble_GB_HGB_results, ensemble_GB_HGB
 from input_processing.input_setup import y_test
-from model_comparison import results_df
 from tabulate import tabulate
 # ── Improved Model Comparison Table ────────── ───────────────────────────────
 
@@ -119,7 +118,7 @@ print("=" * 95)
 # ── Export Results to CSV ───────────────────────────────────────────────────
 
 # 1. Define the output file path inside your project structure
-csv_file_path = ROOT_DIR / 'model' / 'model_performance_comparison.csv'
+csv_file_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'model_performance_comparison.csv'
 
 # 2. Save the dataframe to CSV (index=True includes your 'Rank' column!)
 results_df.to_csv(csv_file_path, index=True)
@@ -234,7 +233,7 @@ axes[1].legend()
 
 # ── Final Layout ─────────────────────────────────────────────────────────────
 plt.tight_layout()
-output_path_0 = ROOT_DIR / 'chart_prediction.png'
+output_path_0 = ROOT_DIR / 'output_storage' / 'images' / 'chart_prediction.png'
 plt.savefig(
     output_path_0,
     dpi=150,
@@ -248,7 +247,19 @@ print(f"\n📊 Error Stats for Best Model: {best_model_name}")
 print(f"   Mean Error:   {errors.mean():.2f} units")
 print(f"   Std Dev:      {errors.std():.2f} units")
 print(f"   Within ±20:   {(np.abs(errors) <= 20).mean()*100:.1f}% of predictions")
+# ── Export: Best Model Predictions & Errors ─────────────────────────────────
 
+best_predictions_df = pd.DataFrame({
+    'Actual':         y_test.values,
+    'Predicted':      y_pred_best,
+    'Error':          errors,
+    'Abs_Error':      np.abs(errors),
+    'Within_20':      np.abs(errors) <= 20
+})
+
+best_pred_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'best_model_predictions.csv'
+best_predictions_df.to_csv(best_pred_csv_path, index=True, index_label='Sample_Index')
+print(f"💾 Best model predictions exported to:\n   {best_pred_csv_path}")
 # ── Compare Actual vs Predicted for ALL Models ──────────────────────────────
 # ── Create Subplots ─────────────────────────────────────────────────────────
 
@@ -309,7 +320,7 @@ plt.suptitle(
 )
 
 plt.tight_layout(rect=[0, 0, 1, 0.96])
-output_path_1 = ROOT_DIR / 'actual_predicted_all_models.png'
+output_path_1 = ROOT_DIR / 'output_storage' / 'images' / 'actual_predicted_all_models.png'
 plt.savefig(
     output_path_1,
     dpi=150,
@@ -371,9 +382,101 @@ plt.legend(
 plt.tight_layout()
 
 # ── Save Figure ────────────────────────────────────────────────────────────
-output_path_2 = ROOT_DIR / 'model_comparison_150_200.png'
+output_path_2 = ROOT_DIR / 'output_storage' / 'images' / 'model_comparison_150_200.png'
 plt.savefig(
     output_path_2,
     dpi=150
 )
 plt.show()
+
+# ── Clustered Bar Chart: MAE vs RMSE for All Models ─────────────────────────
+
+model_names = [results['Model'] for results in all_results.values()]
+mae_values  = [results['MAE']   for results in all_results.values()]
+rmse_values = [results['RMSE']  for results in all_results.values()]
+
+x = np.arange(len(model_names))
+bar_width = 0.35
+
+fig, ax = plt.subplots(figsize=(14, 7))
+
+# ── Side-by-side bars ───────────────────────────────────────────────────────
+bars_mae = ax.bar(
+    x - bar_width / 2,
+    mae_values,
+    bar_width,
+    label='MAE',
+    color='steelblue',
+    alpha=0.85
+)
+
+bars_rmse = ax.bar(
+    x + bar_width / 2,
+    rmse_values,
+    bar_width,
+    label='RMSE',
+    color='coral',
+    alpha=0.85
+)
+
+# ── Value labels on top of bars ─────────────────────────────────────────────
+for bar in bars_mae:
+    height = bar.get_height()
+    ax.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 0.002,
+        f'{height:.3f}',
+        ha='center',
+        va='bottom',
+        fontsize=9,
+        fontweight='bold'
+    )
+
+for bar in bars_rmse:
+    height = bar.get_height()
+    ax.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 0.002,
+        f'{height:.3f}',
+        ha='center',
+        va='bottom',
+        fontsize=9,
+        fontweight='bold'
+    )
+
+# ── Formatting ──────────────────────────────────────────────────────────────
+ax.set_xticks(x)
+ax.set_xticklabels(model_names, rotation=30, ha='right', fontsize=10)
+
+ax.set_xlabel('Model', fontsize=12)
+ax.set_ylabel('Error Value', fontsize=12)
+
+ax.set_title(
+    'MAE vs RMSE per Model (Clustered Bar Chart)\nLower = Better',
+    fontsize=15,
+    fontweight='bold'
+)
+
+ax.legend(fontsize=11)
+ax.grid(axis='y', alpha=0.3)
+
+plt.tight_layout()
+
+output_path_3 = ROOT_DIR / 'output_storage' / 'images' / 'mae_rmse_clustered_bar.png'
+
+plt.savefig(output_path_3, dpi=150, bbox_inches='tight')
+plt.show()
+
+print(f"\n📊 Clustered MAE vs RMSE chart saved to:\n   {output_path_3}")
+
+# ── Export: MAE + RMSE Summary ───────────────────────────────────────────────
+
+mae_rmse_df = pd.DataFrame({
+    'Model':       model_names,
+    'MAE':         mae_values,
+    'RMSE':        rmse_values,
+}).sort_values('MAE').reset_index(drop=True)
+
+mae_rmse_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'mae_rmse_summary.csv'
+mae_rmse_df.to_csv(mae_rmse_csv_path, index=False)
+print(f"💾 MAE+RMSE summary exported to:\n   {mae_rmse_csv_path}")

@@ -71,7 +71,7 @@ for i, val in enumerate(promo_demand.values):
     axes[1].text(i, val + 1, f'{val:.1f}', ha='center', fontweight='bold')
 
 plt.tight_layout()
-output_path_1 = ROOT_DIR / 'chart_region_promo.png'
+output_path_1 = ROOT_DIR / 'output_storage' / 'images' / 'chart_region_promo.png'
 plt.savefig(output_path_1, dpi=150, bbox_inches='tight')
 plt.show()
 plt.close(fig)
@@ -97,7 +97,7 @@ sns.heatmap(corr_matrix,
 plt.title(' Correlation Heatmap\n(How closely each column is related)', 
           fontsize=14, fontweight='bold')
 plt.tight_layout()
-output_path_2 = ROOT_DIR / 'chart_heatmap.png'
+output_path_2 = ROOT_DIR / 'output_storage' / 'images' / 'chart_heatmap.png'
 plt.savefig(output_path_2, dpi=150, bbox_inches='tight')
 plt.show()
 

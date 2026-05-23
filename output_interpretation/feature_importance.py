@@ -28,7 +28,7 @@ from model.ensemble_1 import ensemble_XGBoost_HGB_results, ensemble_XGBoost_HGB
 from model.ensemble_2 import ensemble_GB_HGB_results, ensemble_GB_HGB
 from input_processing.input_setup import y_test, X_test, feature_columns
 from model.LSTM import X_test_lstm
-from output_interpretation import results_df
+from model_comparison import results_df
 
 
 # ── Store ALL Trained Models ────────────────────────────────────────────────
@@ -138,7 +138,7 @@ for bar, val in zip(
 # ── Final Layout ────────────────────────────────────────────────────────────
 
 plt.tight_layout()
-output_path_2 = ROOT_DIR / 'chart_permutation_importance.png'
+output_path_2 = ROOT_DIR / 'output_storage' / 'images' / 'chart_permutation_importance.png'
 plt.savefig(
     output_path_2,
     dpi=150,
@@ -161,3 +161,8 @@ for rank, (_, row) in enumerate(
         f"{row['Feature']:25s} → "
         f"{row['Importance']:.4f}"
     )
+# ── Export: Permutation Feature Importance ───────────────────────────────────
+
+perm_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'feature_importance.csv'
+perm_df.to_csv(perm_csv_path, index=False)
+print(f"\n💾 Feature importance exported to:\n   {perm_csv_path}")
