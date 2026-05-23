@@ -84,11 +84,11 @@ search = RandomizedSearchCV(
 
     param_distributions=param_grid,
 
-    n_iter=30,
+    n_iter=50,
 
     scoring='neg_mean_absolute_error',
 
-    cv=8,
+    cv=5,
 
     verbose=1,
 
@@ -234,10 +234,6 @@ predictions_df = pd.DataFrame({
     'Base_Error':       y_true - y_pred_base,
     'Tuned_Error':      y_true - y_pred_tuned
 })
-
-predictions_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'tuned_hybrid_predictions.csv'
-predictions_df.to_csv(predictions_csv_path, index=True, index_label='Sample_Index')
-print(f"💾 Predictions exported to:\n   {predictions_csv_path}")
 
 # ── Export: Base vs Tuned Comparison Table ───────────────────────────────────
 
