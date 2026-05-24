@@ -223,39 +223,9 @@ Based on the model results:
 pip install pandas scikit-learn matplotlib seaborn xgboost lightgbm tensorflow tabulate
 ```
 
-### 2. Update the data path
-
-In `input_processing/data_loading.py`, replace the hardcoded path with your local path:
-
-```python
-df = pd.read_csv('your/path/to/demand_forecasting.csv')
+### 2. Run the model
 ```
-
-### 3. Run in order
-
-```bash
-# Part 1 — Data pipeline
-python input_processing/data_loading.py
-python input_processing/data_processing.py
-python input_processing/data_visualization.py
-python input_processing/input_setup.py
-
-# Part 2 — Train models
-python model/linear_regression.py
-python model/LSTM.py
-python model/LightGBM.py
-python model/Gradient_Boosting.py
-python model/XGBoost.py
-python model/histogram_gradient_boosting.py
-python model/ensemble_1.py
-python model/ensemble_2.py
-
-# Part 3 — Evaluate
-python output_interpretation/model_comparison.py
-python output_interpretation/feature_importance.py
-python output_interpretation/fine_tuning.py
-```
-
+Select file run.py to run the complete model
 ---
 
 ## Dependencies
