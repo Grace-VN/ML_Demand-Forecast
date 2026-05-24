@@ -217,34 +217,57 @@ Based on the model results:
 
 ## How to Run
 
-### 1. Install dependencies
+### 1. Install Dependencies
+
+Run the following command to install all required libraries:
 
 ```bash
-pip install pandas scikit-learn matplotlib seaborn xgboost lightgbm tensorflow tabulate
+pip install pandas numpy scikit-learn matplotlib seaborn xgboost lightgbm tensorflow tabulate
 ```
 
-### 2. Run the model
+### 2. Execute the Project
+
+Run the main pipeline file:
+
+```bash
+python run.py
 ```
-Select file run.py to run the complete model
+
+The `run.py` script executes the complete demand forecasting workflow, including:
+- Data preprocessing
+- Feature engineering
+- Model training
+- Hyperparameter tuning
+- Ensemble prediction
+- Performance evaluation
+- Visualization generation
+
+Generated outputs such as charts, evaluation results, and comparison figures are stored in the `output_storage/` directory.
+
 ---
 
 ## Dependencies
 
-```
-Python 3.8+
-pandas
-numpy
-scikit-learn
-xgboost
-lightgbm
-tensorflow
-matplotlib
-seaborn
-tabulate
-```
+| Library | Purpose |
+|----------|----------|
+| pandas | Data manipulation and analysis |
+| numpy | Numerical computations |
+| scikit-learn | Machine learning models and evaluation |
+| xgboost | Gradient boosting model |
+| lightgbm | High-performance boosting framework |
+| tensorflow | Deep learning models (LSTM) |
+| matplotlib | Data visualization |
+| seaborn | Statistical visualization |
+| tabulate | Formatted result tables |
+
+### Environment
+- Python 3.8+
 
 ---
 
 ## Author
 
-Grace · [GitHub](https://github.com/Grace-VN)
+**Grace Nguyen**  
+Data Analyst & Machine Learning Practitioner  
+
+GitHub: https://github.com/Grace-VN
