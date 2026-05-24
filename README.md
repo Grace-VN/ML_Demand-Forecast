@@ -117,17 +117,17 @@ and ensemble methods:
 
 | Rank | Model | MAE | RMSE | R² |
 |---|---|---|---|---|
-| 🥇 1 | **Ensemble 2 (GB + HGB)** | **lowest** | **lowest** | **highest** |
-| 2 | Ensemble 1 (XGBoost + HGB) | — | — | — |
-| 3 | Histogram Gradient Boosting | — | — | — |
-| 4 | XGBoost | — | — | — |
-| 5 | LightGBM | — | — | — |
-| 6 | Gradient Boosting | — | — | — |
-| 7 | LSTM | — | — | — |
-| 8 | Linear Regression | — | — | — |
+| 🥇 1 | **Ensemble 2 (GB + HGB)** | **8.521** | **11.556** | **0.939** |
+| 2 | Ensemble 1 (XGBoost + HGB) | 8.690 | 11.723 | 0.938 |
+| 3 | Histogram Gradient Boosting | 8.733 | 11.854 | 0.936 |
+| 4 | XGBoost | 9.436 | 12.863 | 0.925 |
+| 5 | LightGBM | 9.966 | 13.385 | 0.919 |
+| 6 | Gradient Boosting | 9.9966 | 13.391 | 0.919 |
+| 7 | LSTM | 13.071 | 17.331 | 0.864 |
+| 8 | Linear Regression | 16.709 | 22.485 | 0.771 |
 
 > Actual metric values are generated at runtime and exported to
-> `model/model_performance_comparison.csv`.
+> `output_storage/csv_files/model_performance_comparison.csv`.
 
 ---
 
@@ -168,11 +168,16 @@ network applied to tabular data — a context where gradient boosting consistent
 
 **5. Fine-tuning confirms and extends the advantage**
 
-After RandomizedSearchCV fine-tuning (30 iterations, 8-fold CV), the tuned Ensemble 2
+After RandomizedSearchCV fine-tuning (10 iterations, 10-fold CV), the tuned Ensemble 2
 further improved over its own baseline on all three metrics (MAE, RMSE, R²), confirming
 that the model architecture is sound and responds well to optimisation.
+| Metric | Ensemble 2 (Base) | Ensemble 2 (Tuned) | Percentage of Improvement (%) |
+|--------|-------------------|---------------|-------------------------------|
+| MAE    | 8.5214            | 8.2233        | **3.63%**                         |
+| RMSE   | 11.5561           | 11.2560       | **2.67%**                         |
+| R²     | 0.9395            | 0.9426        | **0.33%**                         |
 
----
+![Model Comparison](output_storage/images/model_comparison_150_200.png)
 
 ## Business Recommendation
 
