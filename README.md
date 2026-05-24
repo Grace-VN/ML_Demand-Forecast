@@ -127,7 +127,7 @@ and ensemble methods:
 | 7 | LSTM | 13.071 | 17.331 | 0.864 |
 | 8 | Linear Regression | 16.709 | 22.485 | 0.771 |
 
-![Model Comparison](output_storage/images/model_comparison_150_200.pngoutput_storage/images/mae_rmse_clustered_bar.png)
+![Model Comparison](output_storage/images/mae_rmse_clustered_bar.png)
 ![Model Comparison](output_storage/images/model_comparison_150_200.png)
 
 
