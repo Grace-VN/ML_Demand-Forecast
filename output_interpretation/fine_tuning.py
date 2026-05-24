@@ -49,18 +49,18 @@ hybrid_ensemble = VotingRegressor([
 param_grid = {
 
     # GB parameters
-    'gb__n_estimators': [100, 200, 300],
+    'gb__n_estimators': [200, 300, 350],
 
     'gb__max_depth': [4, 6, 8],
 
-    'gb__learning_rate': [0.1, 0.2, 0.5],
+    'gb__learning_rate': [0.2, 0.5, 0.8],
 
     # HGB parameters
-    'HGB__max_iter': [100, 200, 300],
+    'HGB__max_iter': [200, 300, 350],
 
     'HGB__max_depth': [4, 6, 8],
 
-    'HGB__learning_rate': [0.1, 0.2, 0.5],
+    'HGB__learning_rate': [0.2, 0.5, 0.8],
 
     # Ensemble weights
     'weights': [
@@ -84,11 +84,11 @@ search = RandomizedSearchCV(
 
     param_distributions=param_grid,
 
-    n_iter=50,
+    n_iter=10,
 
     scoring='neg_mean_absolute_error',
 
-    cv=5,
+    cv=10,
 
     verbose=1,
 
@@ -235,6 +235,10 @@ predictions_df = pd.DataFrame({
     'Tuned_Error':      y_true - y_pred_tuned
 })
 
+predictions_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'tuned_vs_base_predictions.csv'
+predictions_df.to_csv(predictions_csv_path, index=False)
+print(f"💾 Predictions exported to:\n   {predictions_csv_path}")
+
 # ── Export: Base vs Tuned Comparison Table ───────────────────────────────────
 
 comparison_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'tuned_vs_base_comparison.csv'
@@ -244,12 +248,12 @@ print(f"💾 Comparison table exported to:\n   {comparison_csv_path}")
 # ── Export: Tuned Hybrid Metrics Summary ─────────────────────────────────────
 
 metrics_df = pd.DataFrame([{
-    'Model':  tuned_hybrid_results['Model'],
-    'MAE':    tuned_hybrid_results['MAE'],
-    'RMSE':   tuned_hybrid_results['RMSE'],
-    'R2':     tuned_hybrid_results['R2'],
-    'Best_CV_MAE':      search.best_score_,
-    'Best_Params':      str(search.best_params_)
+    'Model':        tuned_hybrid_results['Model'],
+    'MAE':          tuned_hybrid_results['MAE'],
+    'RMSE':         tuned_hybrid_results['RMSE'],
+    'R2':           tuned_hybrid_results['R2'],
+    'Best_CV_MAE':  search.best_score_,
+    'Best_Params':  str(search.best_params_)
 }])
 
 metrics_csv_path = ROOT_DIR / 'output_storage' / 'csv_files' / 'tuned_hybrid_metrics.csv'

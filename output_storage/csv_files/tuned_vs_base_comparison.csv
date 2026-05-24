@@ -1,0 +1,4 @@
+Metric,Ensemble 2 (Base),Tuned Hybrid,Percentage of Improvement (%)
+MAE,8.5214,8.2233,3.63%
+RMSE,11.5561,11.2560,2.67%
+R²,0.9395,0.9426,0.33%

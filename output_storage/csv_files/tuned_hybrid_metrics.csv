@@ -1,0 +1,2 @@
+Model,MAE,RMSE,R2,Best_CV_MAE,Best_Params
+Tuned Hybrid Ensemble,8.223260195312765,11.256009570011182,0.942632172235093,-8.47942909903499,"{'weights': [3, 4], 'gb__n_estimators': 300, 'gb__max_depth': 6, 'gb__learning_rate': 0.5, 'HGB__max_iter': 200, 'HGB__max_depth': 6, 'HGB__learning_rate': 0.8}"
