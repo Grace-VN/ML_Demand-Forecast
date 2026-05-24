@@ -54,6 +54,7 @@ ML_Demand-Forecast/
 │   ├── feature_importance.py
 │   └── fine_tuning.py
 │
+├── run.py/     # For running the complete model
 └── README.md
 ```
 
@@ -126,8 +127,9 @@ and ensemble methods:
 | 7 | LSTM | 13.071 | 17.331 | 0.864 |
 | 8 | Linear Regression | 16.709 | 22.485 | 0.771 |
 
-> Actual metric values are generated at runtime and exported to
-> `output_storage/csv_files/model_performance_comparison.csv`.
+![Model Comparison](output_storage/images/model_comparison_150_200.pngoutput_storage/images/mae_rmse_clustered_bar.png)
+![Model Comparison](output_storage/images/model_comparison_150_200.png)
+
 
 ---
 
@@ -177,7 +179,7 @@ that the model architecture is sound and responds well to optimisation.
 | RMSE   | 11.5561           | 11.2560       | **2.67%**                         |
 | R²     | 0.9395            | 0.9426        | **0.33%**                         |
 
-![Model Comparison](output_storage/images/model_comparison_150_200.png)
+![Tuned-Original comparison](output_storage/images/actual_predicted_tuned_original.png)
 
 ## Business Recommendation
 
