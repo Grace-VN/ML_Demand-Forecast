@@ -28,7 +28,7 @@ from model.ensemble_1 import ensemble_XGBoost_HGB_results, ensemble_XGBoost_HGB
 from model.ensemble_2 import ensemble_GB_HGB_results, ensemble_GB_HGB
 from input_processing.input_setup import y_test, X_test, feature_columns
 from model.LSTM import X_test_lstm
-from model_comparison import results_df
+from output_interpretation.model_comparison import results_df
 
 
 # ── Store ALL Trained Models ────────────────────────────────────────────────
